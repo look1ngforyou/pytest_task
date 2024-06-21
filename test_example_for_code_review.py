@@ -25,7 +25,7 @@ class TestWebsite:
           (By.XPATH, '//input[contains(@type, "password")]'),
           (By.XPATH, '//button[contains(@type, "submit")]'),
           (By.XPATH, "//div[contains(text(), 'Пожалуйста, проверьте')]"))])
-    def test_combined_function(self, url, body_xpath, main_page_xpath, login_page_xpath, username_xpath, password_xpath,
+    def test_combined_function(self, url, body_xpath, main_page_xpath, log_page_xpath, username_xpath, password_xpath,
                                login_xpath, error_xpath):
         self.driver.get(url)
         wait = WebDriverWait(self.driver, timeout=self.TIMEOUT)
@@ -38,7 +38,7 @@ class TestWebsite:
         login_page_button_transmission = wait.until(ec.element_to_be_clickable(main_page_xpath))
         login_page_button_transmission.click()
 
-        assert wait.until(ec.visibility_of_element_located(login_page_xpath))
+        assert wait.until(ec.visibility_of_element_located(log_page_xpath))
         print('The login page is opened.')
 
         username_input = wait.until(ec.element_to_be_clickable(username_xpath))
