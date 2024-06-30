@@ -1,34 +1,23 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.support.ui import WebDriverWait
 from Pages.WebPagesSingleton import WebPages
+from Pages.BasePage import BasePage
 
 
-class MainPage:
-    TIMEOUT = 15
+class MainPage(BasePage):
+    LOADED_PAGE_XPATH = (By.XPATH, '//div[contains(@class, "page_background_overlay")]')
+    SEARCH_BOX_ID = (By.ID, 'store_nav_search_term')
+    SEARCH_BUTTON_XPATH = (By.XPATH, '//*[@id="store_search_link"]//img')
 
-    def __init__(self):
-        web_pages = WebPages.get_instance()
-        self.driver = web_pages.driver
-        self.wait = WebDriverWait(self.driver, self.TIMEOUT)
-
-    def setup(self, url):
-        self.driver.get(url)
-
-    def main_page_is_displayed(self, main_page_xpath_check):
-        self.wait.until(ec.element_to_be_clickable(main_page_xpath_check))
+    def main_page_is_displayed(self):
+        self.wait.until(ec.element_to_be_clickable(self.LOADED_PAGE_XPATH))
         return True
 
-    def game_search(self, search_box_xpath, search_word, search_button_xpath):
-        search_box = self.wait.until(ec.presence_of_element_located(search_box_xpath))
+    def game_search(self, search_word):
+        search_box = self.wait.until(ec.presence_of_element_located(self.SEARCH_BOX_ID))
         search_box.send_keys(search_word)
-        self.wait.until(ec.element_to_be_clickable(search_button_xpath)).click()
-
-    def quit(self):
-        self.driver.quit()
+        self.wait.until(ec.element_to_be_clickable(self.SEARCH_BUTTON_XPATH)).click()
 
     @staticmethod
     def navigate_to_search_page():
         return WebPages.get_instance().driver.current_url
-
-

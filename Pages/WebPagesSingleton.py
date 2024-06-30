@@ -16,7 +16,3 @@ class WebPages:
             cls._instance = cls()
         return cls._instance
 
-    def quit_driver(self):
-        if self.driver:
-            self.driver.quit()
-            self.driver = None

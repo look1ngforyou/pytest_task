@@ -1,60 +1,30 @@
+from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import TimeoutException
-from Pages.WebPagesSingleton import WebPages
+from Pages.BasePage import BasePage
+from Configuration.TestUtils import sorting_prices
 
 
-class SearchPageForTheRequest:
-    TIMEOUT = 15
+class SearchPageForTheRequest(BasePage):
+    SEARCH_PAGE_ID_CHECK = (By.ID, 'search_result_container')
+    DROPDOWN_ID = (By.ID, 'sort_by_trigger')
+    SELECTION_ID = (By.ID, 'Price_DESC')
+    OPACITY_XPATH = (By.XPATH, '//*[@id="search_result_container" and @style="opacity: 0.5;"]')
+    FORMATTING_PRICE_TEMPLATE = '(//div[contains(@class, "discount_final_price")])[{}]'
 
-    def __init__(self):
-        web_pages = WebPages.get_instance()
-        self.driver = web_pages.driver
-        self.wait = WebDriverWait(self.driver, self.TIMEOUT)
-
-    def setup(self, url):
-        self.driver.get(url)
-
-    def search_page_is_displayed(self, search_page_xpath_check):
-        if self.wait.until(ec.presence_of_element_located(search_page_xpath_check)):
+    def search_page_is_displayed(self):
+        if self.wait.until(ec.presence_of_element_located(self.SEARCH_PAGE_ID_CHECK)):
             return True
 
-    def sort_dropdown_menu(self, dropdown_xpath, selection_xpath):
-        self.wait.until(ec.element_to_be_clickable(dropdown_xpath)).click()
-        self.wait.until(ec.element_to_be_clickable(selection_xpath)).click()
+    def sort_dropdown_menu(self):
+        self.wait.until(ec.element_to_be_clickable(self.DROPDOWN_ID)).click()
+        self.wait.until(ec.element_to_be_clickable(self.SELECTION_ID)).click()
 
-    def waiting_for_changing_price(self, opacity_xpath):
+    def waiting_for_changing_price(self):
         try:
-            self.wait.until(ec.presence_of_element_located(opacity_xpath))
+            self.wait.until(ec.presence_of_element_located(self.OPACITY_XPATH))
         except TimeoutException:
             pass
 
-    def quit(self):
-        self.driver.quit()
-
-    def sorting_prices(self, formatting_price_xpath, range_num):
-        prices_list = []
-        for i in range(1, range_num + 1):
-            dynamic_xpath = formatting_price_xpath.format(i)
-            dynamic_price_xpath = (By.XPATH, dynamic_xpath)
-
-            try:
-                game_price_element = self.wait.until(ec.visibility_of_element_located(dynamic_price_xpath))
-                price_text = game_price_element.text.strip()
-
-                if price_text.lower() in ['free to play', 'free', 'бесплатно']:
-                    continue
-
-                if price_text.lower().startswith('your price:') or price_text.lower().startswith('цена для вас:'):
-                    price_text = price_text.split(':', 1)[-1].strip()
-
-                price = price_text[:-1].replace(',', '.')
-                final_price = float(price)
-                prices_list.append(final_price)
-
-            except TimeoutException:
-                continue
-
-        sorted_prices = sorted(prices_list, reverse=True)
-        return prices_list, sorted_prices
+    def sorting_prices(self, range_num):
+        return sorting_prices(self.driver, self.wait, range_num, self.FORMATTING_PRICE_TEMPLATE)
