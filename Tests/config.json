@@ -1,0 +1,14 @@
+{
+  "TIMEOUT": 15,
+  "URL": "https://store.steampowered.com",
+  "pytest_params" : [
+    {
+      "search_word" : "The Witcher",
+      "range_num" : 20
+    },
+    {
+      "search_word" : "Fallout",
+      "range_num" : 10
+    }
+  ]
+}

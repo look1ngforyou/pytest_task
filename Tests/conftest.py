@@ -1,15 +1,15 @@
 import pytest
 from selenium import webdriver
-from Pages.WebPagesSingleton import WebPages
+from Pages.driver_singleton import WebPages
 
 
 @pytest.fixture(scope="class")
-def setup(request):
+def setup():
     driver = webdriver.Chrome()
     WebPages._instance = None
     web_pages = WebPages()
     web_pages.driver = driver
 
-    request.cls.driver = driver
-    yield
+    yield driver, web_pages
+
     driver.quit()
