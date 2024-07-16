@@ -44,7 +44,7 @@
   },
   "upload_image": {
     "URL": "https://the-internet.herokuapp.com/upload",
-    "photo": "C:\\Users\\vikic\\PycharmProjects\\SeleniumTask3\\tests\\test_photo.jpg",
+    "photo": "...\\SeleniumTask3\\tests\\test_photo.jpg",
     "photo_name":  "test_photo.jpg"
   }
 }
