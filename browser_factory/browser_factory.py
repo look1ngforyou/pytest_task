@@ -1,6 +1,8 @@
 from selenium.webdriver import Chrome, Firefox, Edge
 import logging
 
+logger = logging.getLogger('logger')
+
 
 class BrowserFactory:
     @staticmethod
@@ -13,5 +15,5 @@ class BrowserFactory:
             driver = Edge()
         else:
             raise ValueError(f"Do not support this browser type {browser_type}")
-        logging.info(f"Returning the browser type {browser_type} from the BrowserFactory")
+        logger.info(f"Returning the browser type {browser_type} from the BrowserFactory")
         return driver

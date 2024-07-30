@@ -1,5 +1,7 @@
 import logging
 
+logger = logging.getLogger('logger')
+
 
 class BasePage:
     UNIQUE_ELEMENT_LOC = None
@@ -9,6 +11,6 @@ class BasePage:
         self.unique_element = unique_element
 
     def wait_for_open(self) -> None:
-        logging.info("Waiting for  unique element to open")
+        logger.info("Waiting for unique element to open")
         self.unique_element.presence_of_element_located()
-        logging.info("Unique element has opened")
+        logger.info("Unique element has opened")

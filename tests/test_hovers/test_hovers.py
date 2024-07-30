@@ -1,17 +1,6 @@
 import pytest
 import logging
-from tests.test_hovers.page1 import Page1
-from browser.browser import Browser
-from logging_configuration.logger import setup_logging
-
-
-@pytest.fixture
-def browser():
-    setup_logging()
-    browser = Browser("chrome")
-
-    yield browser
-    browser.quit()
+from web_pages.hovers_page import Page1
 
 
 class TestHovers:
@@ -25,7 +14,8 @@ class TestHovers:
         (3, "name: user3", "/users/3"),
     ])
     def test_hover(self, browser, index, username, link_piece):
-        logging.warning("Executing hover test")
+        logger = logging.getLogger('logger')
+        logger.info("Executing hover test")
         self.page_1 = Page1(browser)
 
         browser.get(self.URL)
@@ -38,6 +28,5 @@ class TestHovers:
         self.page_1.get_profile_label(index).click()
         current_url = browser.current_url()
         assert current_url.endswith(link_piece), f"Current url {current_url} is not opened for {link_piece}"
-        logging.warning("Executed hover interaction")
 
 

@@ -4,19 +4,18 @@ import logging
 
 
 class SliderElement(BaseElement):
-    def __init__(self, driver, locator_1=None, attribute=None, timeout=15, direction=None, value=0):
-        super().__init__(driver, locator_1 or (None, None), attribute, timeout)
-        self.direction = direction
-        self.value = value
+    RIGHT = "right"
+    LEFT = "left"
 
-    def move_the_slider_to_the_trajectory(self):
+    def __init__(self, driver, locator_1=None, timeout=15, description=None):
+        super().__init__(driver, locator_1 or (None, None), timeout, description)
+
+    def move_the_slider_to_the_trajectory(self, direction, value):
         slider = self.wait(self.driver, self.timeout).until(self.ec.presence_of_element_located(self.locator_1))
-        logging.info(f"Moving slider {self.direction} with a locator: {self.locator_1}")
-        if self.direction == "right":
-            for _ in range(self.value):
+        logging.info(f"{self.description} moving slider to the {direction}")
+        if direction == self.RIGHT:
+            for _ in range(value):
                 slider.send_keys(Keys.ARROW_RIGHT)
-                logging.info("Moved slider to the right")
-        elif self.direction == "left":
-            for _ in range(self.value):
+        elif direction == self.LEFT:
+            for _ in range(value):
                 slider.send_keys(Keys.ARROW_LEFT)
-                logging.info("Moved slider to the left")

@@ -1,36 +1,36 @@
-import pytest
 import logging
-from tests.test_infinite_scroll.page1 import Page1
-from browser.browser import Browser
-from logging_configuration.logger import setup_logging
-
-
-@pytest.fixture
-def browser():
-    setup_logging()
-    browser = Browser("chrome")
-
-    yield browser
-    browser.quit()
+from web_pages.infinite_scroll_page import Page1
+import time
 
 
 class TestInfiniteScroll:
     URL = "https://the-internet.herokuapp.com/infinite_scroll"
-    AIMING_PARAGRAPH_VALUE = 19
+    AIMING_PARAGRAPH_VALUE = 12
+    PARAGRAPH_COUNT = 0
 
     def test(self, browser):
-        logging.warning("Executing an infinite scroll test")
+        logger = logging.getLogger('logger')
+        logger.info("Executing an infinite scroll test")
         self.page_1 = Page1(browser)
 
         browser.get(self.URL)
         self.page_1.wait_for_open()
 
-        while self.page_1.get_paragraph_count() < self.AIMING_PARAGRAPH_VALUE:
-            self.page_1.scroll_down()
-            logging.info(f"Current paragraph count: {self.page_1.get_paragraph_count()}")
+        last_height = browser.execute_script("return document.body.scrollHeight")
 
-        assert self.page_1.get_paragraph_count() >= self.AIMING_PARAGRAPH_VALUE,\
-            f"The paragraphs amount {self.AIMING_PARAGRAPH_VALUE} is not matching"
-        logging.warning("Successful interaction with an infinite scroll")
+        while self.PARAGRAPH_COUNT < self.AIMING_PARAGRAPH_VALUE:
+            browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
+            time.sleep(1)
 
+            paragraphs = self.page_1.find_all()
+            paragraph_count = len(paragraphs)
+
+            new_height = browser.execute_script("return document.body.scrollHeight")
+            logger.info(f"Current paragraph count: {paragraph_count}")
+            if new_height == last_height:
+                break
+            last_height = new_height
+
+        assert self.PARAGRAPH_COUNT == self.AIMING_PARAGRAPH_VALUE,\
+            f"Expected {self.AIMING_PARAGRAPH_VALUE} got instead {self.PARAGRAPH_COUNT}"
