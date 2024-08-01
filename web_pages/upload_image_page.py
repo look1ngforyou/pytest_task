@@ -22,8 +22,12 @@ class Page1(BasePage):
     def send_keys(self, image):
         self.input.send_keys(image)
 
-    def click(self):
+    def click_to_submit_image(self):
         self.button.click()
 
-    def text(self):
+    def upload_image(self, image):
+        self.send_keys(image)
+        self.click_to_submit_image()
+
+    def get_image_text(self):
         return self.label.text()

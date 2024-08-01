@@ -18,11 +18,11 @@ class Page1(BasePage):
         self.image_2 = ImageElement(driver, self.IMG_2_LOC, description="Dynamic content Page -> Image_2")
         self.image_3 = ImageElement(driver, self.IMG_3_LOC, description="Dynamic content Page -> Image_3")
 
-    def image_1_attribute(self):
+    def get_image_1_attribute(self):
         return self.image_1.get_attribute(self.ATTRIBUTE)
 
-    def image_2_attribute(self):
+    def get_image_2_attribute(self):
         return self.image_2.get_attribute(self.ATTRIBUTE)
 
-    def image_3_attribute(self):
+    def get_image_3_attribute(self):
         return self.image_3.get_attribute(self.ATTRIBUTE)

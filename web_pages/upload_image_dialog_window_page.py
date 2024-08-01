@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from base_page.base_page import BasePage
 from elements.label_element import LabelElement
 from elements.web_element import WebElement
+from test_utilities.test_utilities import upload_file_via_fe
 
 
 class Page1(BasePage):
@@ -18,10 +19,14 @@ class Page1(BasePage):
         self.web_element_2 = WebElement(driver, self.CHECK_MARK_SYMBOL_LOC,
                                         description="Image Upload Page -> Check mark")
 
-    def click(self):
+    def click_to_submit_image(self):
         self.web_element_1.click()
 
-    def text(self):
+    def upload_image_via_fe(self, file_path):
+        self.click_to_submit_image()
+        upload_file_via_fe(file_path)
+
+    def get_image_text(self):
         return self.label.text()
 
     def presence_of_check_mark_located(self):

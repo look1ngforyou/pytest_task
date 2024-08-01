@@ -6,17 +6,13 @@ from bs4 import BeautifulSoup
 
 class Page1(BasePage):
     UNIQUE_ELEMENT_LOC = (By.XPATH, '//div[contains(@class, "example")]')
-    BS_FEATURE = 'html.parser'
-    BS_NAME_TAG = 'div'
-    BS_ATTRIBUTE = 'jscroll-added'
 
     def __init__(self, driver):
         unique_element = LabelElement(driver, self.UNIQUE_ELEMENT_LOC)
         super().__init__(driver, unique_element)
 
     def find_all(self):
-        page_source = self.driver.page_source()
-        soup = BeautifulSoup(page_source, self.BS_FEATURE)
-        paragraphs = soup.find_all(self.BS_NAME_TAG, class_=self.BS_ATTRIBUTE)
+        page_source = self.driver.get_page_source()
+        soup = BeautifulSoup(page_source, 'html.parser')
+        paragraphs = soup.find_all('div', class_='jscroll-added')
         return paragraphs
-

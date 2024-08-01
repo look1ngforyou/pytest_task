@@ -25,3 +25,15 @@ class Page1(BasePage):
     def get_profile_label(self, index):
         profile_label_template = (By.XPATH, self.PROFILE_LABEL_TEMPLATE.format(index))
         return LabelElement(self.driver, profile_label_template, description="Hovers Page -> Profile Template")
+
+    def hover_over_figure(self, index):
+        figure = self.get_figure(index)
+        figure.hover_over_element()
+
+    def get_caption_text(self, index):
+        caption = self.get_caption(index)
+        return caption.text()
+
+    def click_profile_label(self, index):
+        profile_label = self.get_profile_label(index)
+        profile_label.click()

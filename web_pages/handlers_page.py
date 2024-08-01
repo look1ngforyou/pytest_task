@@ -13,5 +13,5 @@ class Page1(BasePage):
         super().__init__(driver, unique_element)
         self.button = ButtonElement(driver, self.BUTTON_LOC, description="Handlers Page -> Redirection Button")
 
-    def click(self):
+    def click_for_new_tab(self):
         self.button.click()

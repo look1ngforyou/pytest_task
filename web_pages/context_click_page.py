@@ -11,7 +11,7 @@ class Page1(BasePage):
     def __init__(self, driver):
         unique_element = LabelElement(driver, self.UNIQUE_ELEMENT_LOC)
         super().__init__(driver, unique_element)
-        self.web_element = WebElement(driver, self.CONTEXT_MENU_LOC, description="Context Menu Page -> Window ")
+        self.web_element = WebElement(driver, self.CONTEXT_MENU_LOC, description="Context Menu Page -> Window")
 
-    def right_click(self):
+    def right_click_on_window(self):
         self.web_element.right_click()

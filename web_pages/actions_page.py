@@ -16,8 +16,7 @@ class Page1(BasePage):
         self.label = LabelElement(driver, self.SLIDER_VALUE_LOC, description="Slider Page -> Slider Value")
 
     def move_slider(self, direction, value):
-        self.slider.move_the_slider_to_the_trajectory(direction=direction,
-                                                      value=value)
+        self.slider.move(direction=direction, value=value)
 
     def get_slider_value(self):
         real_value = float(self.label.text())
