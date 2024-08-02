@@ -5,19 +5,17 @@ import pytest
 
 
 class TestUploadImage:
-    URL = config.UPLOAD_IMAGE_URL
-
-    @pytest.mark.parametrize('image, image_name', [
+    @pytest.mark.parametrize('image, expected_image_name', [
         ("tests\\test_data\\test_photo.jpg", "test_photo.jpg")])
-    def test_upload_image(self, browser, image, image_name):
+    def test_upload_image(self, browser, image, expected_image_name):
         logger = logging.getLogger('logger')
-        logger.warning("Executing an upload image test")
-        browser.get(self.URL)
+        logger.info("Execute an upload image test")
+        browser.get(config.UPLOAD_IMAGE_URL)
 
-        self.page_1 = Page1(browser)
-        self.page_1.wait_for_open()
+        self.UploadImagePage = Page1(browser)
+        self.UploadImagePage.wait_for_open()
 
-        self.page_1.upload_image(image)
+        self.UploadImagePage.upload_image(image)
 
-        text = self.page_1.get_image_text()
-        assert text == image_name, "The file name is not displaying"
+        actual_name = self.UploadImagePage.get_image_text()
+        assert actual_name == expected_image_name, "The file name is not displaying"

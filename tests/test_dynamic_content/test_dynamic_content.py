@@ -4,24 +4,22 @@ from config import config
 
 
 class TestDynamicContent:
-    URL = config.DYNAMIC_CONTENT_URL
-
     def test_dynamic_content(self, browser):
         logger = logging.getLogger('logger')
-        logger.info("Executing an dynamic content test")
-        browser.get(self.URL)
+        logger.info("Execute a dynamic content test")
+        browser.get(config.DYNAMIC_CONTENT_URL)
 
-        self.page_1 = Page1(browser)
-        self.page_1.wait_for_open()
+        self.DynamicContentPage = Page1(browser)
+        self.DynamicContentPage.wait_for_open()
 
-        image_1 = self.page_1.get_image_1_attribute()
-        image_2 = self.page_1.get_image_2_attribute()
-        image_3 = self.page_1.get_image_3_attribute()
+        images_sources = self.DynamicContentPage.get_images_sources()
 
-        while len({image_1, image_2, image_3}) == 3:
+        while len(set(images_sources)) == 3:
             browser.refresh()
-            image_1 = self.page_1.get_image_1_attribute()
-            image_2 = self.page_1.get_image_2_attribute()
-            image_3 = self.page_1.get_image_3_attribute()
+            images_sources = self.DynamicContentPage.get_images_sources()
+
+        image_1 = images_sources[0]
+        image_2 = images_sources[1]
+        image_3 = images_sources[2]
 
         assert image_1 == image_2 or image_1 == image_3 or image_2 == image_3, "The images do not match"

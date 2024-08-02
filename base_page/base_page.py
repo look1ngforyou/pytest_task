@@ -11,5 +11,5 @@ class BasePage:
         self.unique_element = unique_element
 
     def wait_for_open(self) -> None:
-        logger.info("Waiting for unique element to open")
+        logger.info("Wait for unique element to open")
         self.unique_element.presence_of_element_located()

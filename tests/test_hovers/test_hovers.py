@@ -5,8 +5,6 @@ from config import config
 
 
 class TestHovers:
-    URL = config.HOVERS_URL
-
     @pytest.mark.parametrize("index, username, link_piece", [
         (1, "name: user1", "/users/1"),
         (2, "name: user2", "/users/2"),
@@ -14,18 +12,16 @@ class TestHovers:
     ])
     def test_hovers(self, browser, index, username, link_piece):
         logger = logging.getLogger('logger')
-        logger.info("Executing hover test")
-        browser.get(self.URL)
+        logger.info("Execute hover test")
+        browser.get(config.HOVERS_URL)
 
-        self.page_1 = Page1(browser)
-        self.page_1.wait_for_open()
+        self.HoversPage = Page1(browser)
+        self.HoversPage.wait_for_open()
 
-        self.page_1.hover_over_figure(index)
-        text = self.page_1.get_caption_text(index)
-        assert text == username, f"The required text {username} is not expected {text}"
+        self.HoversPage.hover_over_figure(index)
+        actual_text = self.HoversPage.get_caption_text(index)
+        assert actual_text == username, f"The required text {username} is not expected {actual_text}"
 
-        self.page_1.click_profile_label(index)
+        self.HoversPage.click_profile_label(index)
         current_url = browser.get_current_url()
         assert current_url.endswith(link_piece), f"Current url {current_url} is not opened for {link_piece}"
-
-

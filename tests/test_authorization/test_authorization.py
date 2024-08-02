@@ -6,18 +6,17 @@ from config import config
 class TestAuthorization:
     LOGIN = "admin"
     PASS = "admin"
-    URL = config.AUTHORIZATION_URL.format(LOGIN, PASS)
     AUTHORIZATION_EXPECTED_TEXT = "Congratulations! You must have the proper credentials."
 
     def test_authorization(self, browser):
         logger = logging.getLogger('logger')
-        logger.info("Executing an authorization test")
-        browser.get(self.URL)
+        logger.info("Execute an authorization test")
+        browser.get(config.AUTHORIZATION_URL.format(self.LOGIN, self.PASS))
 
-        self.page_1 = Page1(browser)
-        self.page_1.wait_for_open()
+        self.AuthorizationPage = Page1(browser)
+        self.AuthorizationPage.wait_for_open()
 
-        page_text = self.page_1.page_text()
+        actual_page_text = self.AuthorizationPage.get_page_text()
 
-        assert page_text == self.AUTHORIZATION_EXPECTED_TEXT, \
-            f"The required text {page_text} is not expected {self.AUTHORIZATION_EXPECTED_TEXT}"
+        assert actual_page_text == self.AUTHORIZATION_EXPECTED_TEXT, \
+            f"The required text {actual_page_text} is not expected {self.AUTHORIZATION_EXPECTED_TEXT}"

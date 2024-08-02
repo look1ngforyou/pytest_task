@@ -31,6 +31,6 @@ class Page1(BasePage):
     def click_on_js_prompt(self):
         self.button_3.click()
 
-    def result_text(self):
-        return self.label.text()
+    def get_result_text(self):
+        return self.label.text
 

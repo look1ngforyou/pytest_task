@@ -30,4 +30,4 @@ class Page1(BasePage):
         self.click_to_submit_image()
 
     def get_image_text(self):
-        return self.label.text()
+        return self.label.text

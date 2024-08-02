@@ -13,5 +13,5 @@ class Page1(BasePage):
         self.label_1 = LabelElement(driver, self.PAGE_TEXT_XPATH,
                                     description="Authorization Page -> Authorization text")
 
-    def page_text(self):
-        return self.label_1.text()
+    def get_page_text(self):
+        return self.label_1.text

@@ -4,22 +4,21 @@ from config import config
 
 
 class TestAlertContextClick:
-    URL = config.ALERT_CC_URL
-    RESULT_CLICK_ALERT_TEXT = "You selected a context menu"
+    EXPECTED_RESULT_ALERT_TEXT = "You selected a context menu"
 
     def test_alert_context_click(self, browser):
         logger = logging.getLogger('logger')
-        logger.info("Executing an alert test")
-        browser.get(self.URL)
+        logger.info("Execute an alert test")
+        browser.get(config.ALERT_CC_URL)
 
-        self.page_1 = Page1(browser)
-        self.page_1.wait_for_open()
+        self.AlertPage = Page1(browser)
+        self.AlertPage.wait_for_open()
 
-        self.page_1.right_click_on_window()
+        self.AlertPage.right_click_on_window()
 
-        alert_text = browser.get_alert_text()
+        actual_alert_text = browser.get_alert_text()
 
-        assert alert_text == self.RESULT_CLICK_ALERT_TEXT, \
-            f"The required text {alert_text} is not expected {self.RESULT_CLICK_ALERT_TEXT}"
+        assert actual_alert_text == self.EXPECTED_RESULT_ALERT_TEXT, \
+            f"The required text {actual_alert_text} is not expected {self.EXPECTED_RESULT_ALERT_TEXT}"
         browser.accept_alert()
 

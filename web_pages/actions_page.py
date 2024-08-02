@@ -19,5 +19,5 @@ class Page1(BasePage):
         self.slider.move(direction=direction, value=value)
 
     def get_slider_value(self):
-        real_value = float(self.label.text())
+        real_value = float(self.label.text)
         return real_value

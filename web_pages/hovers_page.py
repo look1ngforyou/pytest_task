@@ -14,26 +14,17 @@ class Page1(BasePage):
         unique_element = LabelElement(driver, self.UNIQUE_ELEMENT_LOC)
         super().__init__(driver, unique_element)
 
-    def get_figure(self, index):
-        figure_template = (By.XPATH, self.FIGURE_TEMPLATE.format(index))
-        return WebElement(self.driver, figure_template, description="Hovers Page -> Figure Template")
-
-    def get_caption(self, index):
-        caption_template = (By.XPATH, self.CAPTION_TEMPLATE.format(index))
-        return LabelElement(self.driver, caption_template, description="Hovers Page -> Caption Template")
-
-    def get_profile_label(self, index):
-        profile_label_template = (By.XPATH, self.PROFILE_LABEL_TEMPLATE.format(index))
-        return LabelElement(self.driver, profile_label_template, description="Hovers Page -> Profile Template")
-
     def hover_over_figure(self, index):
-        figure = self.get_figure(index)
+        figure_template = (By.XPATH, self.FIGURE_TEMPLATE.format(index))
+        figure = WebElement(self.driver, figure_template, description="Hovers Page -> Figure Template")
         figure.hover_over_element()
 
     def get_caption_text(self, index):
-        caption = self.get_caption(index)
-        return caption.text()
+        caption_template = (By.XPATH, self.CAPTION_TEMPLATE.format(index))
+        caption = LabelElement(self.driver, caption_template, description="Hovers Page -> Caption Template")
+        return caption.text
 
     def click_profile_label(self, index):
-        profile_label = self.get_profile_label(index)
+        profile_label_template = (By.XPATH, self.PROFILE_LABEL_TEMPLATE.format(index))
+        profile_label = LabelElement(self.driver, profile_label_template, description="Hovers Page -> Profile Template")
         profile_label.click()

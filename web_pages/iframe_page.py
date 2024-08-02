@@ -30,27 +30,27 @@ class Page1(BasePage):
         self.label_iframe = LabelElement(driver, self.TEXT_INSIDE_IFRAME_LOC,
                                          description="Frames Page -> Child Frame text")
 
-    def scroll_into_view(self):
+    def scroll_into_label_view(self):
         self.label.scroll_into_view()
 
     def click_for_redirection(self):
         self.label.click()
 
     def redirection_to_iframes_page(self):
-        self.scroll_into_view()
+        self.scroll_into_label_view()
         self.click_for_redirection()
 
-    def presence_of_title_located(self):
+    def get_presence_of_title_located(self):
         return self.title.presence_of_element_located()
 
-    def presence_of_parent_frame_located(self):
+    def get_presence_of_parent_frame_located(self):
         return self.parent_frame.presence_of_element_located()
 
     def get_frame_text(self):
-        return self.label_frame.text()
+        return self.label_frame.text
 
-    def presence_of_child_iframe_located(self):
+    def get_presence_of_child_iframe_located(self):
         return self.child_iframe.presence_of_element_located()
 
     def get_iframe_text(self):
-        return self.label_iframe.text()
+        return self.label_iframe.text

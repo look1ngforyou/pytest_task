@@ -27,7 +27,7 @@ class Page1(BasePage):
         upload_file_via_fe(file_path)
 
     def get_image_text(self):
-        return self.label.text()
+        return self.label.text
 
     def presence_of_check_mark_located(self):
         return self.web_element_2.presence_of_element_located()

@@ -6,17 +6,24 @@ logger = logging.getLogger('logger')
 
 
 class BrowserFactory:
+    CHROME = "chrome"
+    FIREFOX = "firefox"
+    EDGE = "edge"
+    DEFAULT_BROWSER = CHROME
+    AVAILABLE_BROWSERS = [CHROME, FIREFOX, EDGE]
+
     @staticmethod
-    def get_driver(browser_type, arguments):
-        if browser_type.lower() == "chrome":
+    def get_driver(browser_type=DEFAULT_BROWSER, arguments=None):
+        if browser_type.lower() == BrowserFactory.CHROME:
             options = ChromeOptions()
-            options.add_argument(argument=arguments)
+            for argument in arguments:
+                options.add_argument(argument)
             driver = Chrome(options=options)
-        elif browser_type.lower() == "firefox":
+        elif browser_type.lower() == BrowserFactory.FIREFOX:
             driver = Firefox()
-        elif browser_type.lower() == "edge":
+        elif browser_type.lower() == BrowserFactory.EDGE:
             driver = Edge()
         else:
             raise ValueError(f"Do not support this browser type {browser_type}")
-        logger.info(f"Returning the browser type {browser_type} from the BrowserFactory")
+        logger.info(f"Return the browser type {browser_type} from the BrowserFactory")
         return driver
