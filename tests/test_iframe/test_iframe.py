@@ -9,7 +9,7 @@ class TestIframe:
 
     def test_frames(self, browser):
         logger = logging.getLogger('logger')
-        logger.info("Execute iframe test")
+        logger.info("Execute  iframe test")
         browser.get(config.IFRAME_URL)
 
         self.IframePage = Page1(browser)

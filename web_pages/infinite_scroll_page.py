@@ -33,4 +33,3 @@ class Page1(BasePage):
             last_paragraph.scroll_into_view()
 
         return current_paragraphs
-

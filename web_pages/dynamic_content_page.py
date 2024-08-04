@@ -9,8 +9,7 @@ class Page1(BasePage):
     IMG_1_LOC = (By.XPATH, '(//div[contains(@class, "large-2 columns")]/img)[1]')
     IMG_2_LOC = (By.XPATH, '(//div[contains(@class, "large-2 columns")]/img)[2]')
     IMG_3_LOC = (By.XPATH, '(//div[contains(@class, "large-2 columns")]/img)[3]')
-    ATTRIBUTE = 'src'
-
+    
     def __init__(self, driver):
         unique_element = LabelElement(driver, self.UNIQUE_ELEMENT_LOC)
         super().__init__(driver, unique_element)

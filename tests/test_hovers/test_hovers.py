@@ -10,7 +10,7 @@ class TestHovers:
         (2, "name: user2", "/users/2"),
         (3, "name: user3", "/users/3"),
     ])
-    def test_hovers(self, browser, index, username, link_piece):
+    def test_hovers(self, browser, index, username, link_piece, run):
         logger = logging.getLogger('logger')
         logger.info("Execute hover test")
         browser.get(config.HOVERS_URL)

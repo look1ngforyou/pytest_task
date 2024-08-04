@@ -30,4 +30,4 @@ class Page1(BasePage):
         return self.label.text
 
     def presence_of_check_mark_located(self):
-        return self.web_element_2.presence_of_element_located()
+        return self.web_element_2.get_presence_of_element_located()

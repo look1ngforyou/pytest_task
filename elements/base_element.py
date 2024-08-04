@@ -16,7 +16,7 @@ class BaseElement:
         self.ec = ec
         self.description = description
 
-    def presence_of_element_located(self):
+    def get_presence_of_element_located(self):
         logger.info(f"{self.description} find presence of the element")
         element = WebDriverWait(self.driver.get_driver, self.timeout).until(
             self.ec.presence_of_element_located(self.locator))
@@ -25,7 +25,7 @@ class BaseElement:
     @property
     def text(self):
         logger.info(f"{self.description} get an element text")
-        element = self.presence_of_element_located()
+        element = self.get_presence_of_element_located()
         text = element.text
         logger.info(f"Received an element text: {text}")
         return text
@@ -39,7 +39,7 @@ class BaseElement:
 
     def get_attribute(self, attribute):
         logger.info(f"{self.description} get attribute '{attribute}' from an element")
-        element = self.presence_of_element_located()
+        element = self.get_presence_of_element_located()
         value = element.get_attribute(attribute)
         logger.info(f"Retrieved attribute {value}")
         return value
@@ -65,5 +65,5 @@ class BaseElement:
 
     def scroll_into_view(self):
         logger.info(f"{self.description} scroll to the element")
-        element = self.presence_of_element_located()
+        element = self.get_presence_of_element_located()
         self.driver.execute_script("arguments[0].scrollIntoView();", element)

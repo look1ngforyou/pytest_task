@@ -41,16 +41,16 @@ class Page1(BasePage):
         self.click_for_redirection()
 
     def get_presence_of_title_located(self):
-        return self.title.presence_of_element_located()
+        return self.title.get_presence_of_element_located()
 
     def get_presence_of_parent_frame_located(self):
-        return self.parent_frame.presence_of_element_located()
+        return self.parent_frame.get_presence_of_element_located()
 
     def get_frame_text(self):
         return self.label_frame.text
 
     def get_presence_of_child_iframe_located(self):
-        return self.child_iframe.presence_of_element_located()
+        return self.child_iframe.get_presence_of_element_located()
 
     def get_iframe_text(self):
         return self.label_iframe.text

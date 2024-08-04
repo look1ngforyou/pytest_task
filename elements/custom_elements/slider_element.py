@@ -13,7 +13,7 @@ class Direction(str, Enum):
 
 class SliderElement(BaseElement):
     def move(self, direction: Direction, value):
-        slider = self.presence_of_element_located()
+        slider = self.get_presence_of_element_located()
         logger.info(f"{self.description} move slider to the {direction}")
         if direction == Direction.RIGHT:
             slider.send_keys(Keys.ARROW_RIGHT * value)
