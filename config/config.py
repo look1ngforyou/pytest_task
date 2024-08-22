@@ -1,13 +1,9 @@
-BROWSER_TYPE = "chrome"
-OPTIONS = ["--disable-search-engine-choice-screen", "--window-size=1920,1080"]
+class Configuration:
+    MOVIE_SERVICE_URL = 'https://api.dev-cinescope.store'
+    AUTH_SERVICE_URL = 'https://auth.dev-cinescope.store'
+    PAYMENT_SERVICE_URL = "https://payment.dev-cinescope.store"
 
-ACTIONS_URL = "https://the-internet.herokuapp.com/horizontal_slider"
-ALERT_CC_URL = "https://the-internet.herokuapp.com/context_menu"
-ALERTS_URL = "https://the-internet.herokuapp.com/javascript_alerts"
-AUTHORIZATION_URL = "https://{}:{}@the-internet.herokuapp.com/basic_auth"
-DYNAMIC_CONTENT_URL = "https://the-internet.herokuapp.com/dynamic_content"
-HANDLERS_URL = "https://the-internet.herokuapp.com/windows"
-HOVERS_URL = "https://the-internet.herokuapp.com/hovers"
-IFRAME_URL = "https://demoqa.com/alertsWindows"
-INFINITE_SCROLL_URL = "https://the-internet.herokuapp.com/infinite_scroll"
-UPLOAD_IMAGE_URL = "https://the-internet.herokuapp.com/upload"
+    VALID_CARD_NUMBER = "4242424242424242"
+    VALID_EXPIRATION_DATE = "12/25"
+    VALID_CVV = 123
+
