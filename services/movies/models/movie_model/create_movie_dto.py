@@ -1,7 +1,5 @@
-from enum import Enum
-from typing import Optional, Union
 from pydantic import BaseModel, Field, ConfigDict
-from utilities.location_enumeration import LocationEnum
+from services.movies.models.location_enumeration import LocationEnum
 
 
 class CreateMovieDto(BaseModel):

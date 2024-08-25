@@ -1,13 +1,10 @@
 from uuid import UUID
 import requests
-from utilities.api_utilities import ApiUtilities
+from services.base_helper import BaseHelper
 
 
-class UserHelper:
-    USER_ENDPOINT = "/user/"
-
-    def __init__(self, api_utilities: ApiUtilities):
-        self.api_utilities = api_utilities
+class UserHelper(BaseHelper):
+    USER_ENDPOINT = "user/"
 
     def get_user(self) -> requests.Response:
         response = self.api_utilities.get(self.USER_ENDPOINT)

@@ -1,16 +1,16 @@
 import random
-import pytest
 import requests.status_codes
 from faker import Faker
+from logger.logger import Logger
 from services.movies.helpers.movies_helper import MovieHelper
-from utilities.location_enumeration import LocationEnum
+from services.movies.models.location_enumeration import LocationEnum
 
 faker = Faker()
 
 
 class TestCreateMovieContract:
-    def test_create_movie_admin_contract(self, super_admin_movie_api_utilities):
-        movie_helper = MovieHelper(super_admin_movie_api_utilities)
+    def test_create_movie_admin_contract(self, movie_api_utilities):
+        movie_helper = MovieHelper(movie_api_utilities)
         created_movie = movie_helper.post_movie(json={
             "name": faker.name(),
             "imageUrl": faker.url(),

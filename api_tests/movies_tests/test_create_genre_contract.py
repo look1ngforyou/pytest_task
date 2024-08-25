@@ -1,18 +1,15 @@
 from faker import Faker
-from config.config import Configuration
-import pytest
 import requests
 from services.movies.helpers.genre_helper import GenreHelper
 from logger.logger import Logger
-from services.movies.models.genre import Genre
+from services.movies.models.genre_model.genre import Genre
 
 faker = Faker()
 
 
 class TestGenreCreateContract:
-    def test_genre_create_anonym_contract(self, super_admin_movie_api_utilities):
-        Logger.info("Create new genre")
-        genre_helper = GenreHelper(super_admin_movie_api_utilities)
+    def test_genre_create_anonym_contract(self, movie_api_utilities):
+        genre_helper = GenreHelper(movie_api_utilities)
         genre = Genre(name=faker.name())
         response = genre_helper.post_genre(genre.model_dump())
 

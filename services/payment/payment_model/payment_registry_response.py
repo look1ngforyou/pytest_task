@@ -1,5 +1,4 @@
-from enum import Enum
-from utilities.status_enumeration import Status
+from services.payment.payment_model.status_enumeration import Status
 from pydantic import BaseModel
 
 

@@ -1,7 +1,6 @@
 from typing import List
-import pydantic
 from pydantic import BaseModel
-from utilities.roles_enumeration import RolesEnumeration
+from services.authorization.models.roles_enumeration import RolesEnumeration
 
 
 class EditUserDto(BaseModel):

@@ -1,19 +1,17 @@
 import requests
-from utilities.api_utilities import ApiUtilities
+from services.base_helper import BaseHelper
+import json
 
 
-class PaymentHelper:
-    PAYMENT_ENDPOINT = "/create"
-    USER_ENDPOINT = "/user/"
+class PaymentHelper(BaseHelper):
+    PAYMENT_ENDPOINT = "create/"
+    USER_ENDPOINT = "user/"
 
-    def __init__(self, api_utilities: ApiUtilities):
-        self.api_utilities = api_utilities
-
-    def post_create(self, json) -> requests.Response:
+    def post_create(self, json: json) -> requests.Response:
         response = self.api_utilities.post(self.PAYMENT_ENDPOINT, json=json)
         return response
 
-    def get_user_id(self, user_id) -> requests.Response:
+    def get_user_id(self, user_id: int) -> requests.Response:
         response = self.api_utilities.get(self.USER_ENDPOINT + str(user_id))
         return response
 

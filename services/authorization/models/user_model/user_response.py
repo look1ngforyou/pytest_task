@@ -1,11 +1,13 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from uuid import UUID
 from typing import List, Optional
 import datetime
-from utilities.roles_enumeration import RolesEnumeration
+from services.authorization.models.roles_enumeration import RolesEnumeration
 
 
 class UserResponse(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
     id: UUID
     email: str
     full_name: str = Field(alias="fullName")

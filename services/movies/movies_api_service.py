@@ -1,12 +1,12 @@
 from services.movies.helpers.genre_helper import GenreHelper
 from services.movies.helpers.movies_helper import MovieHelper
 from services.movies.helpers.review_helper import ReviewHelper
-from services.movies.models.create_genre_dto import CreateGenreDto
-from services.movies.models.create_movie_dto import CreateMovieDto
-from services.movies.models.genre_response import GenreResponse, GenreListResponse
-from services.movies.models.movie_response import MovieResponse
-from services.movies.models.movie_review import MovieReview
-from services.movies.models.movie_review_response import MovieReviewResponse
+from services.movies.models.genre_model.create_genre_dto import CreateGenreDto
+from services.movies.models.movie_model.create_movie_dto import CreateMovieDto
+from services.movies.models.genre_model.genre_response import GenreResponse, GenreListResponse
+from services.movies.models.movie_model.movie_response import MovieResponse
+from services.movies.models.review_model.movie_review import MovieReview
+from services.movies.models.review_model.movie_review_response import MovieReviewResponse
 from utilities.api_utilities import ApiUtilities
 
 
@@ -31,15 +31,15 @@ class MoviesService:
                                                                               exclude_defaults=True))
         return MovieResponse(**response.json())
 
-    def post_movie_review(self, movie_id, movie_review: MovieReview) -> MovieReviewResponse:
+    def post_movie_review(self, movie_id: int, movie_review: MovieReview) -> MovieReviewResponse:
         response = self.review_helper.post_movie_review(
             movie_id=movie_id, json=movie_review.model_dump(by_alias=True, exclude_defaults=True))
         return MovieReviewResponse(**response.json())
 
-    def patch_movie_review(self, movie_id, user_id) -> MovieReviewResponse:
+    def patch_movie_review(self, movie_id: int, user_id: str) -> MovieReviewResponse:
         response = self.review_helper.patch_movie_review(movie_id=movie_id, user_id=user_id)
         return MovieReviewResponse(**response.json())
 
-    def delete_review(self, movie_id) -> MovieReviewResponse:
+    def delete_review(self, movie_id: int) -> MovieReviewResponse:
         response = self.review_helper.delete_review(movie_id=movie_id)
         return MovieReviewResponse(**response.json())
