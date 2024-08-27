@@ -1,5 +1,5 @@
 import random
-from test_data.test_data import TestData
+from cards_test_data.cards_test_data import CardsTestData
 from logger.logger import Logger
 import pytest
 from faker import Faker
@@ -11,7 +11,7 @@ faker = Faker()
 
 
 class TestPayment:
-    PAYMENT_AMOUNT_VALUE = random.randint(1,11)
+    PAYMENT_AMOUNT_VALUE = random.randint(1, 11)
 
     @pytest.mark.parametrize("payment_amount", ([PAYMENT_AMOUNT_VALUE]))
     def test_register_user_create_movie_payment_implementation(self, payment_amount, auth_api_service,
@@ -25,10 +25,10 @@ class TestPayment:
         email = registered_user_info.email
 
         Logger.info(" !!! Step 2 - Log in as new user")
-        auth_api_service.update_api_utils(token=None)
+        auth_api_service.update_api_utils_token(token=None)
         login_dto = LoginDto(email=email, password=password)
         login_response = auth_api_service.login_user(login_dto=login_dto)
-        payment_api_service.update_api_utils(token=login_response.access_token)
+        payment_api_service.update_api_utils_token(token=login_response.access_token)
 
         Logger.info(f" !!! Step 3 - Create and pay for {payment_amount} movies")
         for i in range(1, payment_amount + 1):
@@ -37,10 +37,10 @@ class TestPayment:
             created_movie = create_new_movie()
 
             Logger.debug(f"Pay for a {i} movie")
-            card_dto = CardDto(card_number=TestData.VALID_CARD_NUMBER,
+            card_dto = CardDto(card_number=CardsTestData.VALID_CARD_NUMBER,
                                card_holder=faker.first_name() + " " + faker.last_name(),
-                               expiration_date=TestData.VALID_EXPIRATION_DATE,
-                               security_code=TestData.VALID_CVV
+                               expiration_date=CardsTestData.VALID_EXPIRATION_DATE,
+                               security_code=CardsTestData.VALID_CVV
                                )
             create_payment_dto = CreatePaymentDto(movie_id=created_movie.id,
                                                   amount=random.randint(1, 10),

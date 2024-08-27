@@ -11,8 +11,11 @@ class PaymentService:
         self.api_utils = api_utils
         self.payment_helper = PaymentHelper(api_utils)
 
-    def update_api_utils(self, token: str):
+    def update_api_utils_token(self, token: str or None):
         self.api_utils.update_headers(headers={"Authorization": f"Bearer {token}"})
+
+    def update_api_utils(self, headers: dict):
+        self.api_utils.update_headers(headers=headers)
 
     def post_create(self, create_payment_dto: CreatePaymentDto) -> PaymentRegistryResponse:
         response = self.payment_helper.post_create(

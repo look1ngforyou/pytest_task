@@ -10,8 +10,8 @@ class User(BaseModel):
 class MovieReviewResponse(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
-        arbitrary_types_allowed=True
     )
+
     user_id: str = Field(alias="userId")
     rating: int = Field(ge=0, le=5)
     text: str

@@ -16,8 +16,11 @@ class AuthorizationService:
         self.user_helper = UserHelper(api_utils)
         self.authorization_helper = AuthorizationHelper(api_utils)
 
-    def update_api_utils(self, token: str or None):
+    def update_api_utils_token(self, token: str or None):
         self.api_utils.update_headers(headers={"Authorization": f"Bearer {token}"})
+
+    def update_api_utils(self, headers: dict):
+        self.api_utils.update_headers(headers=headers)
 
     def login_user(self, login_dto: LoginDto) -> LoginResponse:
         response = self.authorization_helper.post_login_user(

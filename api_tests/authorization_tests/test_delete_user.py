@@ -18,12 +18,12 @@ class TestDeleteUser:
         email = registered_user_info.email
 
         Logger.info(" !!! Step 2 - Log in as new user")
-        auth_api_service.update_api_utils(token=None)
+        auth_api_service.update_api_utils_token(token=None)
         login_dto = LoginDto(email=email, password=password)
         login_response = auth_api_service.login_user(login_dto=login_dto)
 
         Logger.info(" !!! Step 3 - Delete new user")
-        auth_api_service.update_api_utils(token=login_response.access_token)
+        auth_api_service.update_api_utils_token(token=login_response.access_token)
         auth_api_service.delete_user(registered_user.id)
 
         Logger.info(" !!! Step 4 - Log in as new user for confirm")
