@@ -16,17 +16,17 @@ class TestAlerts:
         logger.info("Execute an alert test")
         browser.get(config.ALERTS_URL)
 
-        self.AlertPage = Page1(browser)
-        self.AlertPage.wait_for_open()
+        self.alert_page = Page1(browser)
+        self.alert_page.wait_for_open()
 
-        self.AlertPage.click_on_js_alert()
+        self.alert_page.click_on_js_alert()
 
         actual_result_text = browser.get_alert_text()
         assert actual_result_text == self.RESULT_ALERT_CONFIRMATION_TEXT_1, \
             f"The required text {actual_result_text} is not expected {self.RESULT_ALERT_CONFIRMATION_TEXT_1}"
         browser.accept_alert()
 
-        actual_result_text = self.AlertPage.get_result_text()
+        actual_result_text = self.alert_page.get_result_text()
         assert actual_result_text == self.RESULT_CLICK_ALERT_TEXT_1, \
             f"The required text {actual_result_text} is not expected {self.RESULT_CLICK_ALERT_TEXT_1}"
 
@@ -35,17 +35,17 @@ class TestAlerts:
         logger.info("Execute an alert test")
         browser.get(config.ALERTS_URL)
 
-        self.AlertPage = Page1(browser)
-        self.AlertPage.wait_for_open()
+        self.alert_page = Page1(browser)
+        self.alert_page.wait_for_open()
 
-        self.AlertPage.click_on_js_confirm()
+        self.alert_page.click_on_js_confirm()
 
         actual_result_text = browser.get_alert_text()
         assert actual_result_text == self.RESULT_ALERT_CONFIRMATION_TEXT_2, \
             f"The required text {actual_result_text} is not expected {self.RESULT_ALERT_CONFIRMATION_TEXT_2}"
         browser.accept_alert()
 
-        actual_result_text = self.AlertPage.get_result_text()
+        actual_result_text = self.alert_page.get_result_text()
         assert actual_result_text == self.RESULT_CLICK_ALERT_TEXT_2, \
             f"The required text {actual_result_text} is not expected {self.RESULT_CLICK_ALERT_TEXT_2}"
 
@@ -55,10 +55,10 @@ class TestAlerts:
         logger.info("Execute an alert test")
         browser.get(config.ALERTS_URL)
 
-        self.AlertPage = Page1(browser)
-        self.AlertPage.wait_for_open()
+        self.alert_page = Page1(browser)
+        self.alert_page.wait_for_open()
 
-        self.AlertPage.click_on_js_prompt()
+        self.alert_page.click_on_js_prompt()
 
         actual_result_text = browser.get_alert_text()
         assert actual_result_text == self.RESULT_ALERT_CONFIRMATION_TEXT_3, \
@@ -66,6 +66,6 @@ class TestAlerts:
         browser.send_keys_to_alert(input_word)
         browser.accept_alert()
 
-        actual_result_text = self.AlertPage.get_result_text()
+        actual_result_text = self.alert_page.get_result_text()
         assert actual_result_text == expected_result_text, \
             f"The required text {actual_result_text} is not expected {expected_result_text}"

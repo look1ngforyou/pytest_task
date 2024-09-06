@@ -14,6 +14,6 @@ def setup_logging_fixture():
 
 @pytest.fixture(scope='function')
 def browser(setup_logging_fixture):
-    browser = Browser(browser_type=config.BROWSER_TYPE, arguments=config.OPTIONS)
+    browser = Browser(browser_type=config.BROWSER_TYPE, arguments=config.OPTIONS, headless=config.HEADLESS)
     yield browser
     browser.quit()

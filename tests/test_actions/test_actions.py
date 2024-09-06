@@ -14,13 +14,13 @@ class TestActions:
         logger.info("Execute an action test")
         browser.get(config.ACTIONS_URL)
 
-        self.ActionsPage = Page1(browser)
-        self.ActionsPage.wait_for_open()
+        self.actions_page = Page1(browser)
+        self.actions_page.wait_for_open()
 
-        self.ActionsPage.move_slider(direction=slider_direction, value=slider_moving_value)
+        self.actions_page.move_slider(direction=slider_direction, value=slider_moving_value)
 
         expected_result = self.SLIDER_DIVISION_UNIT * slider_moving_value
-        actual_result = self.ActionsPage.get_slider_value()
+        actual_result = self.actions_page.get_slider_value()
 
         assert actual_result == expected_result, \
             f"The slider did not move to the specified value {expected_result}, moved instead to {actual_result}"

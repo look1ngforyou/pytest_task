@@ -9,9 +9,9 @@ logger = logging.getLogger('logger')
 class Browser:
     TIMEOUT = 15
 
-    def __init__(self, browser_type, arguments):
+    def __init__(self, browser_type, arguments, headless):
         logger.info(f"Initialize the browser with type: {browser_type}")
-        self._driver = BrowserFactory.get_driver(browser_type=browser_type, arguments=arguments)
+        self._driver = BrowserFactory.get_driver(browser_type=browser_type, arguments=arguments, headless=headless)
 
     @property
     def get_driver(self):

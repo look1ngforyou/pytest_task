@@ -9,14 +9,14 @@ class TestDynamicContent:
         logger.info("Execute a dynamic content test")
         browser.get(config.DYNAMIC_CONTENT_URL)
 
-        self.DynamicContentPage = Page1(browser)
-        self.DynamicContentPage.wait_for_open()
+        self.dynamic_content_page = Page1(browser)
+        self.dynamic_content_page.wait_for_open()
 
-        images_sources = self.DynamicContentPage.get_images_sources()
+        images_sources = self.dynamic_content_page.get_images_sources()
 
         while len(set(images_sources)) == 3:
             browser.refresh()
-            images_sources = self.DynamicContentPage.get_images_sources()
+            images_sources = self.dynamic_content_page.get_images_sources()
 
         image_1 = images_sources[0]
         image_2 = images_sources[1]

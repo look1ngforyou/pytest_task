@@ -11,10 +11,10 @@ class TestAlertContextClick:
         logger.info("Execute an alert test")
         browser.get(config.ALERT_CC_URL)
 
-        self.AlertPage = Page1(browser)
-        self.AlertPage.wait_for_open()
+        self.alert_page = Page1(browser)
+        self.alert_page.wait_for_open()
 
-        self.AlertPage.right_click_on_window()
+        self.alert_page.right_click_on_window()
 
         actual_alert_text = browser.get_alert_text()
 

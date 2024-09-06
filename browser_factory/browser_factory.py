@@ -13,11 +13,14 @@ class BrowserFactory:
     AVAILABLE_BROWSERS = [CHROME, FIREFOX, EDGE]
 
     @staticmethod
-    def get_driver(browser_type=DEFAULT_BROWSER, arguments=None):
+    def get_driver(browser_type=DEFAULT_BROWSER, arguments=None, headless=False):
         if browser_type.lower() == BrowserFactory.CHROME:
             options = ChromeOptions()
-            for argument in arguments:
-                options.add_argument(argument)
+            if headless:
+                options.add_argument("--headless")
+            if arguments:
+                for argument in arguments:
+                    options.add_argument(argument)
             driver = Chrome(options=options)
         elif browser_type.lower() == BrowserFactory.FIREFOX:
             driver = Firefox()
