@@ -1,7 +1,12 @@
 BROWSER_TYPE = "chrome"
-OPTIONS = ["--disable-search-engine-choice-screen", "--window-size=1920,1080"]
+OPTIONS = [
+    "--disable-search-engine-choice-screen",
+    "--window-size=1920,1080",
+    "--no-sandbox",
+    "--disable-dev-shm-usage",
+    "--disable-gpu"
+]
 HEADLESS = True
-
 
 ACTIONS_URL = "https://the-internet.herokuapp.com/horizontal_slider"
 ALERT_CC_URL = "https://the-internet.herokuapp.com/context_menu"
